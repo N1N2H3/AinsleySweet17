@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sweet Seventeen Login</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="login-body">
+
+  <div class="login-overlay"></div>
+
+  <div class="login-container">
+    <div class="login-card">
+
+      <img src="photos/leftuperflower.png" class="flower flower-top" alt="flower" fetchpriority="high">
+      <img src="photos/rightbelowflower.png" class="flower flower-bottom" alt="flower" fetchpriority="high">
+
+      <h1 class="login-title">Felicia Ainsley's Sweet Seventeen Dinner</h1>
+      <p class="login-subtitle">Enter your name to open the invitation</p>
+
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Your Name..." required />
+        <button type="submit">Open Invitation</button>
+      </form>
+
+      <p class="login-note">Please make sure Ainsley knows your name.</p>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="Mandy Moore, Zachary Levi - I See the Light (From Tangled Sing-Along).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function startMusic() {
+      let audio = document.getElementById("bgMusic");
+      if (audio.paused) {
+        audio.play().catch(err => console.log(err));
+      }
+    }
+    document.body.addEventListener("click", startMusic);
+    document.body.addEventListener("keydown", startMusic);
+
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let user = document.getElementById("username").value.trim();
+
+      if(user === ""){
+        alert("Please enter your name.");
+        return;
+      }
+
+      let audio = document.getElementById("bgMusic");
+      localStorage.setItem("bgMusicTime", audio.currentTime);
+
+      localStorage.setItem("guestName", user);
+      window.location.href = "invitation.html";
+    });
+  </script>
+
+</body>
+</html>
